@@ -35,12 +35,11 @@ class MainWidgetState extends State<MainWidget> {
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
-    if (mediaQuery.supportsAnnounce) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (WidgetsBinding.instance.platformDispatcher.semanticsEnabled) {
         SemanticsService.announce(message, TextDirection.ltr);
-      });
-    }
+      }
+    });
   }
 
   @override

@@ -34,7 +34,9 @@ void main() {
       expect(log, isNotEmpty);
       expect(
         log.firstWhere((Map<String, dynamic> message) {
-          final Map<String, dynamic> data = message['data'] as Map<String, dynamic>;
+          final Map<String, dynamic> data = Map<String, dynamic>.from(
+            message['data'] as Map<dynamic, dynamic>,
+          );
           return message['type'] == 'announce' && data['message'] == snackBarText;
         }, orElse: () => <String, dynamic>{}),
         isNotNull,
